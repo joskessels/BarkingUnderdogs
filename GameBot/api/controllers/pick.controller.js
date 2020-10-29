@@ -4,15 +4,25 @@ const appInsights = require("applicationinsights");
 const pick = async (req, res) => {
     var Player1Name = req.body.Player1Name;
     var matchId = req.body.MatchId;
+    var turn = req.body.TurnNumber;
     if (Player1Name == undefined || matchId == undefined) {
         res.status(400);
         res.send("Player1NamerId or MatchId undefined");
         return;
     }
-
-    // implement arcade intelligence here
+    
     const strategyOption = process.env.PICK_STRATEGY || "RANDOM";
-    const result = pickFromStrategy(strategyOption);
+    if (Player1Name == 'Libby' && turn = 0) {
+        const result = FixedStrategy(RPSLSChoices[1]).pick();
+    }
+    if (Player1Name == 'Libby' && turn = 1) {
+        const result = FixedStrategy(RPSLSChoices[2]).pick();
+    }
+    else {
+        // implement arcade intelligence here
+        const result = pickFromStrategy(strategyOption);
+    }
+    
     console.log('Against '+Player1Name+', strategy ' + strategyOption + '  played ' + result.text);
     
     const applicationInsightsIK = process.env.APPINSIGHTS_INSTRUMENTATIONKEY;
